@@ -1,0 +1,5 @@
+INSERT INTO "products_orders" ("id", "order_id", "product_id", "qty") VALUES
+('2a052134-cddb-4d4d-9715-f98b40566eb8', 'f3ea634f-b0d1-4261-bce3-58e63151d5f9','8e14ad55-48c1-491b-834e-6203edfc5936', 1),
+('02cac04f-2c7c-42ab-948a-6ae9a6705690', 'f3ea634f-b0d1-4261-bce3-58e63151d5f9','ae36eb85-6c51-4085-8000-5797be838cca', 2),
+('fdf6698c-f38e-4ffc-bf38-25a987cb887e', '18737b67-6b2e-45c8-8abc-2070f76fc816','8e14ad55-48c1-491b-834e-6203edfc5936', 1),
+('3799166d-4636-4cdb-a0ac-7a6133dc3806', '18737b67-6b2e-45c8-8abc-2070f76fc816','ce990149-ed3e-4921-8c3a-33d435170f7d', 1);

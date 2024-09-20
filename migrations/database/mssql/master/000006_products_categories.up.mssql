@@ -1,0 +1,7 @@
+INSERT INTO "products_categories"("id", "product_id", "category_id") VALUES
+('a28cf7b6-5b81-44b3-8703-3b4e9ff6a32c', '8e14ad55-48c1-491b-834e-6203edfc5936', 1),
+('ab543dde-3575-4902-94a9-30ef74cc0109', '6b5cd101-7d72-4570-bda8-17eddd9a1547', 1),
+('5bfaf95f-d99c-42c6-ba56-ac5caed7c7e1', 'ba3faeee-0a2b-44e7-81d7-f399bc342948', 2),
+('c7a49aa4-206b-489f-9db4-b05aff730f48', 'f2506318-28e3-45a6-b0a0-9a1f486c2c10', 2),
+('283c0948-bd32-4ea8-a2e1-cb52b2a4604c', 'ce990149-ed3e-4921-8c3a-33d435170f7d', 3),
+('d6f07aa1-9c1b-4324-9e28-2b7a0a23b336', 'ae36eb85-6c51-4085-8000-5797be838cca', 3);
