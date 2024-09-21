@@ -1,0 +1,15 @@
+meta {
+  name: FetchOneProduct
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://127.0.0.1:8080/v1/product/:product_id
+  body: none
+  auth: none
+}
+
+params:path {
+  product_id: ce990149-ed3e-4921-8c3a-33d435170f7d
+}

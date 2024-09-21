@@ -1,5 +1,5 @@
 CREATE TABLE products_categories (
-    id NVARCHAR(255) NOT NULL PRIMARY KEY,
+    id UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT NewId(),
     product_id UNIQUEIDENTIFIER NOT NULL,
     category_id INT NOT NULL
 );
