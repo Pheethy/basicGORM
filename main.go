@@ -44,7 +44,7 @@ func main() {
     }
 
     gormDB, err := db.DB()
-    if err != nil {
+    if err != nil  {
         panic(err)
     }
     defer func(gormDB *sql.DB) {

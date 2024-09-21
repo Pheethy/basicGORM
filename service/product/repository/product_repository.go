@@ -16,7 +16,7 @@ type productRepository struct {
 }
 
 func NewProductRepository(db *gorm.DB) product.IProductRepository {
-    return productRepository{db: db}
+    return &productRepository{db: db}
 }
 
 func (r productRepository) FetchAllProducts(ctx context.Context) ([]*models.Product, error) {
@@ -79,7 +79,7 @@ func (r productRepository) FetchAllProducts(ctx context.Context) ([]*models.Prod
 
 func (r productRepository) FetchOneProduct(ctx context.Context, productId guid.GUID) (*models.Product, error) {
     productItem := new(models.Product)
-    sqlc := `
+    sqlProduct := `
       SELECT
         products.id,
         products.title,
@@ -91,8 +91,49 @@ func (r productRepository) FetchOneProduct(ctx context.Context, productId guid.G
         products
       WHERE
         products.id = @productId
-  `
-    result := r.db.WithContext(ctx).Raw(sqlc,
+  	`
+    sqlCategories := `
+      SELECT
+        categories.id,
+        categories.title,
+        categories.product_id
+      FROM
+        (
+          SELECT
+            categories.*,
+            products_categories.product_id "product_id"
+          FROM
+            categories
+          LEFT JOIN
+            products_categories
+          ON
+            products_categories.category_id = categories.id
+		  WHERE
+			products_categories.product_id = @productId
+        ) AS categories
+	`
+    sqlImages := `
+      SELECT
+       images.id,
+       images.filename,
+       images.url,
+       images.product_id,
+       images.created_at,
+       images.updated_at
+      FROM
+        images
+      INNER JOIN
+        products
+      ON
+        images.product_id = products.id
+	  WHERE
+		products.id = @productId
+	`
+    result := r.db.WithContext(ctx).Preload("Categories", func(db *gorm.DB) *gorm.DB {
+        return db.Raw(sqlCategories, sql.Named("productId", productId.String()))
+    }).Preload("Images", func(db *gorm.DB) *gorm.DB {
+        return db.Raw(sqlImages, sql.Named("productId", productId.String()))
+    }).Raw(sqlProduct,
         sql.Named("productId", productId.String()),
     ).Find(productItem)
     if result.Error != nil {
@@ -157,7 +198,7 @@ func (r productRepository) UpdateProducts(ctx context.Context, product *models.P
     sqlc := `
     UPDATE
       products
-    SET 
+    SET
       products.title = ?,
       products.description = ?,
       products.price = ?,

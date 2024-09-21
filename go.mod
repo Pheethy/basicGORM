@@ -7,6 +7,7 @@ require (
 	github.com/Pheethy/psql v0.0.0-20240531091221-8bbccfdc1156
 	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/joho/godotenv v1.5.1
+	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cast v1.6.0
 	gorm.io/driver/sqlserver v1.5.3
 	gorm.io/gorm v1.25.10
